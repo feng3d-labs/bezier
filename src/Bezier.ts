@@ -1,7 +1,4 @@
-/**
- * Bézier曲线
- */
-var bezier: Bezier;
+import { equationSolving } from './EquationSolving';
 
 /**
  * Bézier曲线
@@ -9,7 +6,7 @@ var bezier: Bezier;
  * 
  * @author feng / http://feng3d.com 03/06/2018
  */
-class Bezier
+export class Bezier
 {
     /**
      * 线性Bézier曲线
@@ -589,4 +586,7 @@ class Bezier
     }
 }
 
-bezier = new Bezier();
+/**
+ * Bézier曲线
+ */
+export const bezier = new Bezier();

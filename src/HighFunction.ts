@@ -14,7 +14,7 @@
  * 
  * @author feng / http://feng3d.com 05/06/2018
  */
-class HighFunction
+export class HighFunction
 {
     private as: number[];
 

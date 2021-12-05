@@ -1,7 +1,4 @@
-/**
- * 方程求解
- */
-var equationSolving: EquationSolving;
+
 
 /**
  * 方程求解
@@ -15,7 +12,7 @@ var equationSolving: EquationSolving;
  * 
  * @author feng / http://feng3d.com 05/06/2018
  */
-class EquationSolving
+export class EquationSolving
 {
     /**
      * 获取数字的(正负)符号
@@ -431,4 +428,7 @@ class EquationSolving
     }
 }
 
-equationSolving = new EquationSolving();
+/**
+ * 方程求解
+ */
+export const equationSolving = new EquationSolving();
