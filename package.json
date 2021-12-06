@@ -1,6 +1,6 @@
 {
   "name": "@feng3d/bezier",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "解决n次Bézier曲线拟合与求解问题",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
