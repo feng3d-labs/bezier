@@ -11,7 +11,7 @@
   },
   "include": [
     //
-    "../out/bezier.d.ts",
+    "../dist/bezier.d.ts",
     "src/**/*.ts"
   ],
 }

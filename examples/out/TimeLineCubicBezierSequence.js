@@ -18,7 +18,7 @@ var TimeLineCubicBezierSequence = /** @class */ (function () {
         get: function () {
             return this.keys.length;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**

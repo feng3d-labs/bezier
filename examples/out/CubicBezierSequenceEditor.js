@@ -37,7 +37,8 @@
             return;
         var x = ev.clientX - rect.left;
         var y = ev.clientY - rect.top;
-        if (editIndex % 3 == 0) {
+        if (editIndex % 3 == 0) // 关键点
+         {
             var offsetx = x - xs[editIndex];
             var offsety = y - ys[editIndex];
             xs[editIndex] = x;
@@ -53,7 +54,8 @@
                 ys[editIndex + 1] += offsety;
             }
         }
-        else if (editIndex % 3 == 1) {
+        else if (editIndex % 3 == 1) // 右边控制点
+         {
             // 改变左边控制点
             if (editIndex - 2 > -1) {
                 var leftLength = Math.sqrt((xs[editIndex - 2] - xs[editIndex - 1]) * (xs[editIndex - 2] - xs[editIndex - 1]) + (ys[editIndex - 2] - ys[editIndex - 1]) * (ys[editIndex - 2] - ys[editIndex - 1]));
@@ -76,7 +78,8 @@
                 ys[editIndex] = y;
             }
         }
-        else if (editIndex % 3 == 2) {
+        else if (editIndex % 3 == 2) // 左边控制点
+         {
             // 改变右边控制点
             if (editIndex + 2 < xs.length) {
                 var leftLength = Math.sqrt((xs[editIndex + 1] - xs[editIndex]) * (xs[editIndex + 1] - xs[editIndex]) + (ys[editIndex + 1] - ys[editIndex]) * (ys[editIndex + 1] - ys[editIndex]));

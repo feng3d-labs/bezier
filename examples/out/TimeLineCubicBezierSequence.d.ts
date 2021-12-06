@@ -26,7 +26,7 @@ declare class TimeLineCubicBezierSequence {
     /**
      * 关键点数量
      */
-    readonly numKeys: number;
+    get numKeys(): number;
     /**
      * 添加关键点
      *
@@ -62,14 +62,14 @@ declare class TimeLineCubicBezierSequence {
      */
     getPoint(t: number): {
         t: number;
-        y: number;
+        y: any;
         tan: number;
     };
     /**
      * 获取值
      * @param t 时间轴的位置 [0,1]
      */
-    getValue(t: number): number;
+    getValue(t: number): any;
     /**
      * 查找关键点
      * @param t 时间轴的位置 [0,1]
@@ -88,7 +88,7 @@ declare class TimeLineCubicBezierSequence {
      */
     addKeyAtCurve(t: number, y: number, precision: number): {
         t: number;
-        y: number;
+        y: any;
         tan: number;
     };
     /**
