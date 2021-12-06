@@ -1,11 +1,12 @@
+import { ok } from 'assert';
 import { HighFunction } from '..';
 
-QUnit.module('HighFunction', () =>
+describe('HighFunction', () =>
 {
     // 允许误差
     const deviation = 0.0000001;
 
-    QUnit.test('getValue 获取函数 f(x) 的值 ', (assert: { ok: (arg0: boolean) => void; }) =>
+    it('getValue 获取函数 f(x) 的值 ', () =>
     {
         for (let i = 0; i < 100; i++)
         {
@@ -25,7 +26,7 @@ QUnit.module('HighFunction', () =>
             const x = Math.random();
             const fx = f(x);
             const hfx = hf.getValue(x);
-            assert.ok(Math.abs(fx - hfx) < deviation);
+            ok(Math.abs(fx - hfx) < deviation);
         }
     });
 });

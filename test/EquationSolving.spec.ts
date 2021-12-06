@@ -1,12 +1,13 @@
+import { ok } from 'assert';
 import { equationSolving, HighFunction } from '..';
 
-QUnit.module('EquationSolving', () =>
+describe('EquationSolving', () =>
 {
     // 允许误差
     const precision = 0.0000001;
     const testtimes = 100;
 
-    QUnit.test('binary 二分法 求解 f(x) == 0 ', (assert: { ok: (arg0: boolean) => void; }) =>
+    it('binary 二分法 求解 f(x) == 0 ', () =>
     {
         for (let i = 0; i < testtimes; i++)
         {
@@ -25,11 +26,11 @@ QUnit.module('EquationSolving', () =>
             const x = equationSolving.binary(f, a, b, precision);
             const fx = f(x);
 
-            assert.ok(fx < precision);
+            ok(fx < precision);
         }
     });
 
-    QUnit.test('line 连线法 求解 f(x) == 0 ', (assert: { ok: (arg0: boolean) => void; }) =>
+    it('line 连线法 求解 f(x) == 0 ', () =>
     {
         for (let i = 0; i < testtimes; i++)
         {
@@ -47,11 +48,11 @@ QUnit.module('EquationSolving', () =>
             const x = equationSolving.line(f, a, b, precision);
             const fx = f(x);
 
-            assert.ok(fx < precision);
+            ok(fx < precision);
         }
     });
 
-    QUnit.test('tangent 切线法 求解 f(x) == 0 ', (assert: { ok: (arg0: boolean, arg1: string) => void; }) =>
+    it('tangent 切线法 求解 f(x) == 0 ', () =>
     {
         for (let i = 0; i < testtimes; i++)
         {
@@ -74,23 +75,22 @@ QUnit.module('EquationSolving', () =>
             // 求解 ff(x) == 0
             const x = equationSolving.tangent(f, f1, f2, a, b, precision, (err) =>
             {
-                assert.ok(true, err.message);
+                ok(true, err.message);
             });
 
             if (x < a || x > b)
             {
-                assert.ok(true, `解 ${x} 超出求解区间 [${a}, ${b}]`);
+                ok(true, `解 ${x} 超出求解区间 [${a}, ${b}]`);
             }
-            else
-            if (x !== undefined)
+            else if (x !== undefined)
             {
                 const fx = f(x);
-                assert.ok(fx < precision);
+                ok(fx < precision);
             }
         }
     });
 
-    QUnit.test('secant 割线法（弦截法） 求解 f(x) == 0 ', (assert: { ok: (arg0: boolean, arg1: string) => void; }) =>
+    it('secant 割线法（弦截法） 求解 f(x) == 0 ', () =>
     {
         for (let i = 0; i < testtimes; i++)
         {
@@ -107,18 +107,17 @@ QUnit.module('EquationSolving', () =>
             // 求解 ff(x) == 0
             const x = equationSolving.secant(f, a, b, precision, (err) =>
             {
-                assert.ok(true, err.message);
+                ok(true, err.message);
             });
 
             if (x < a || x > b)
             {
-                assert.ok(true, `解 ${x} 超出求解区间 [${a}, ${b}]`);
+                ok(true, `解 ${x} 超出求解区间 [${a}, ${b}]`);
             }
-            else
-            if (x !== undefined)
+            else if (x !== undefined)
             {
                 const fx = f(x);
-                assert.ok(fx < precision);
+                ok(fx < precision);
             }
         }
     });
