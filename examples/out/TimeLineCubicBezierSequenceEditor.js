@@ -5,8 +5,8 @@
     var canvaswidth = canvas.width;
     var canvasheight = canvas.height;
     // window.addEventListener("click", onMouseClick)
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("dblclick", ondblclick);
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('dblclick', ondblclick);
     var timeline = new TimeLineCubicBezierSequence();
     /**
      * 点绘制尺寸
@@ -24,26 +24,29 @@
     var mousedownxy = { x: -1, y: -1 };
     function onMouseDown(ev) {
         var rect = canvas.getBoundingClientRect();
-        if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom))
+        if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom)) {
             return;
+        }
         var x = ev.clientX - rect.left;
         var y = ev.clientY - rect.top;
         mousedownxy.x = x;
         mousedownxy.y = y;
         editKey = timeline.findKey(x / canvaswidth, y / canvasheight, pointSize / canvasheight / 2);
-        if (editKey == null) {
+        if (editKey === null) {
             controlkey = findControlPoint(x, y);
         }
-        window.addEventListener("mousemove", onMouseMove);
-        window.addEventListener("mouseup", onMouseUp);
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
     }
     function onMouseMove(ev) {
-        if (editKey == null && controlkey == null)
+        if (editKey === null && controlkey === null) {
             return;
+        }
         editing = true;
         var rect = canvas.getBoundingClientRect();
-        if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom))
+        if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom)) {
             return;
+        }
         var x = ev.clientX - rect.left;
         var y = ev.clientY - rect.top;
         if (editKey) {
@@ -53,23 +56,23 @@
         }
         else if (controlkey) {
             var index = timeline.indexOfKeys(controlkey);
-            if (index == 0 && x / canvaswidth < controlkey.t) {
+            if (index === 0 && x / canvaswidth < controlkey.t) {
                 controlkey.tan = y / canvasheight > controlkey.y ? Infinity : -Infinity;
                 return;
             }
-            if (index == timeline.numKeys - 1 && x / canvaswidth > controlkey.t) {
+            if (index === timeline.numKeys - 1 && x / canvaswidth > controlkey.t) {
                 controlkey.tan = y / canvasheight > controlkey.y ? -Infinity : Infinity;
                 return;
             }
             controlkey.tan = (y / canvasheight - controlkey.y) / (x / canvaswidth - controlkey.t);
         }
     }
-    function onMouseUp(ev) {
+    function onMouseUp(_ev) {
         editing = false;
         editKey = null;
         controlkey = null;
-        window.removeEventListener("mousemove", onMouseMove);
-        window.removeEventListener("mouseup", onMouseUp);
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
     }
     function findControlPoint(x, y) {
         for (var i = 0; i < timeline.numKeys; i++) {
@@ -89,30 +92,32 @@
         return null;
     }
     function ondblclick(ev) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         editing = false;
         editKey = null;
         controlkey = null;
         var rect = canvas.getBoundingClientRect();
-        if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom))
+        if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom)) {
             return;
+        }
         var x = ev.clientX - rect.left;
         var y = ev.clientY - rect.top;
         var selectedKey = timeline.findKey(x / canvaswidth, y / canvasheight, pointSize / canvasheight / 2);
-        if (selectedKey != null) {
+        if (selectedKey !== null) {
             timeline.deleteKey(selectedKey);
         }
         else {
             // 没有选中关键与控制点时，检查是否点击到曲线
-            var result = timeline.addKeyAtCurve(x / canvaswidth, y / canvasheight, pointSize / canvasheight / 2);
+            timeline.addKeyAtCurve(x / canvaswidth, y / canvasheight, pointSize / canvasheight / 2);
         }
     }
     requestAnimationFrame(draw);
     function draw() {
         clearCanvas(canvas);
         if (timeline.numKeys > 0) {
-            var sameples = timeline.getSamples(canvaswidth);
-            var xSamples = sameples.map(function (value, i) { return canvaswidth * i / (sameples.length - 1); });
-            var ySamples = sameples.map(function (value) { return canvasheight * value; });
+            var sameples_1 = timeline.getSamples(canvaswidth);
+            var xSamples = sameples_1.map(function (value, i) { return canvaswidth * i / (sameples_1.length - 1); });
+            var ySamples = sameples_1.map(function (value) { return canvasheight * value; });
             // 绘制曲线
             drawPointsCurve(canvas, xSamples, ySamples, 'white', 3);
         }
@@ -122,26 +127,26 @@
             var currenty = key.y * canvasheight;
             var currenttan = key.tan * canvasheight / canvaswidth;
             // 绘制曲线端点
-            drawPoints(canvas, [currentx], [currenty], "red", pointSize);
+            drawPoints(canvas, [currentx], [currenty], 'red', pointSize);
             // 绘制控制点
             if (i > 0) {
                 // 左边控制点
                 var lcp = { x: currentx - controllerLength * Math.cos(Math.atan(currenttan)), y: currenty - controllerLength * Math.sin(Math.atan(currenttan)) };
-                drawPoints(canvas, [lcp.x], [lcp.y], "blue", pointSize);
+                drawPoints(canvas, [lcp.x], [lcp.y], 'blue', pointSize);
             }
             if (i < n - 1) {
                 var rcp = { x: currentx + controllerLength * Math.cos(Math.atan(currenttan)), y: currenty + controllerLength * Math.sin(Math.atan(currenttan)) };
-                drawPoints(canvas, [rcp.x], [rcp.y], "blue", pointSize);
+                drawPoints(canvas, [rcp.x], [rcp.y], 'blue', pointSize);
             }
             // 绘制控制点
             if (i > 0) {
                 // 左边控制点
                 var lcp = { x: currentx - controllerLength * Math.cos(Math.atan(currenttan)), y: currenty - controllerLength * Math.sin(Math.atan(currenttan)) };
-                drawPointsCurve(canvas, [currentx, lcp.x], [currenty, lcp.y], "yellow", 1);
+                drawPointsCurve(canvas, [currentx, lcp.x], [currenty, lcp.y], 'yellow', 1);
             }
             if (i < n - 1) {
                 var rcp = { x: currentx + controllerLength * Math.cos(Math.atan(currenttan)), y: currenty + controllerLength * Math.sin(Math.atan(currenttan)) };
-                drawPointsCurve(canvas, [currentx, rcp.x], [currenty, rcp.y], "yellow", 1);
+                drawPointsCurve(canvas, [currentx, rcp.x], [currenty, rcp.y], 'yellow', 1);
             }
         }
         //

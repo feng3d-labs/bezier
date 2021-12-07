@@ -16,7 +16,7 @@ interface TimeLineCubicBezierKey
 
 /**
  * 基于时间轴的连续三阶Bézier曲线
- * 
+ *
  * @author feng / http://feng3d.com 10/06/2018
  */
 class TimeLineCubicBezierSequence
@@ -36,12 +36,11 @@ class TimeLineCubicBezierSequence
         return this.keys.length;
     }
 
-
     /**
      * 添加关键点
-     * 
+     *
      * 添加关键点后将会执行按t进行排序
-     * 
+     *
      * @param key 关键点
      */
     addKey(key: TimeLineCubicBezierKey)
@@ -52,7 +51,7 @@ class TimeLineCubicBezierSequence
 
     /**
      * 关键点排序
-     * 
+     *
      * 当移动关键点或者新增关键点时需要再次排序
      */
     sort()
@@ -66,9 +65,9 @@ class TimeLineCubicBezierSequence
      */
     deleteKey(key: TimeLineCubicBezierKey)
     {
-        var index = this.keys.indexOf(key);
-        if (index != -1)
-            this.keys.splice(index, 1);
+        const index = this.keys.indexOf(key);
+        if (index !== -1)
+        { this.keys.splice(index, 1); }
     }
 
     /**
@@ -95,41 +94,42 @@ class TimeLineCubicBezierSequence
      */
     getPoint(t: number)
     {
-        var keys = this.keys;
-        var maxtan = this.maxtan;
+        const keys = this.keys;
+        const maxtan = this.maxtan;
         for (let i = 0, n = keys.length; i < n; i++)
         {
             // 使用 bezierCurve 进行采样曲线点
-            var key = keys[i];
-            var prekey = keys[i - 1];
+            const key = keys[i];
+            const prekey = keys[i - 1];
             if (i > 0 && prekey.t <= t && t <= key.t)
             {
-                var xstart = prekey.t;
-                var ystart = prekey.y;
-                var tanstart = prekey.tan;
-                var xend = key.t;
-                var yend = key.y;
-                var tanend = key.tan;
+                const xstart = prekey.t;
+                const ystart = prekey.y;
+                const tanstart = prekey.tan;
+                const xend = key.t;
+                const yend = key.y;
+                const tanend = key.tan;
                 if (maxtan > Math.abs(tanstart) && maxtan > Math.abs(tanend))
                 {
-                    var ct = (t - prekey.t) / (key.t - prekey.t);
-                    var sys = [ystart, ystart + tanstart * (xend - xstart) / 3, yend - tanend * (xend - xstart) / 3, yend];
-                    var fy = bezier.getValue(ct, sys);
-                    return { t: t, y: fy, tan: bezier.getDerivative(ct, sys) / (xend - xstart) };
-                } else
-                {
-                    return { t: t, y: prekey.y, tan: 0 };
+                    const ct = (t - prekey.t) / (key.t - prekey.t);
+                    const sys = [ystart, ystart + tanstart * (xend - xstart) / 3, yend - tanend * (xend - xstart) / 3, yend];
+                    const fy = bezier.bezier.getValue(ct, sys);
+
+                    return { t, y: fy, tan: bezier.bezier.getDerivative(ct, sys) / (xend - xstart) };
                 }
+
+                return { t, y: prekey.y, tan: 0 };
             }
-            if (i == 0 && t <= key.t)
+            if (i === 0 && t <= key.t)
             {
-                return { t: t, y: key.y, tan: 0 };
+                return { t, y: key.y, tan: 0 };
             }
-            if (i == n - 1 && t >= key.t)
+            if (i === n - 1 && t >= key.t)
             {
-                return { t: t, y: key.y, tan: 0 };
+                return { t, y: key.y, tan: 0 };
             }
         }
+
         return null;
     }
 
@@ -139,7 +139,8 @@ class TimeLineCubicBezierSequence
      */
     getValue(t: number)
     {
-        var point = this.getPoint(t);
+        const point = this.getPoint(t);
+
         return point.y;
     }
 
@@ -151,7 +152,7 @@ class TimeLineCubicBezierSequence
      */
     findKey(t: number, y: number, precision: number)
     {
-        var keys = this.keys;
+        const keys = this.keys;
         for (let i = 0; i < keys.length; i++)
         {
             if (Math.abs(keys[i].t - t) < precision && Math.abs(keys[i].y - y) < precision)
@@ -159,44 +160,48 @@ class TimeLineCubicBezierSequence
                 return keys[i];
             }
         }
+
         return null;
     }
 
     /**
      * 添加曲线上的关键点
-     * 
+     *
      * 如果该点在曲线上，则添加关键点
-     * 
+     *
      * @param t 时间轴的位置 [0,1]
      * @param y y坐标
      * @param precision 查找进度
      */
     addKeyAtCurve(t: number, y: number, precision: number)
     {
-        var point = this.getPoint(t);
+        const point = this.getPoint(t);
         if (Math.abs(y - point.y) < precision)
         {
             this.addKey(point);
+
             return point;
         }
+
         return null;
     }
 
     /**
      * 获取曲线样本数据
-     * 
+     *
      * 这些点可用于连线来拟合曲线。
-     * 
+     *
      * @param num 采样次数 ，采样点分别为[0,1/num,2/num,....,(num-1)/num,1]
      */
     getSamples(num = 100)
     {
-        var results: number[] = [];
+        const results: number[] = [];
         for (let i = 0; i <= num; i++)
         {
-            var p = this.getValue(i / num)
+            const p = this.getValue(i / num);
             results.push(p);
         }
+
         return results;
     }
 }

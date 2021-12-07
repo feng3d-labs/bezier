@@ -1,30 +1,29 @@
 (() =>
 {
     // 创建画布
-    var canvas = createCanvas(0, 60, window.innerWidth, window.innerHeight - 60);
-    var button = document.getElementById("button");
+    const canvas = createCanvas(0, 60, window.innerWidth, window.innerHeight - 60);
+    const button = document.getElementById('button');
     draw();
 
     button.onclick = function ()
     {
-        draw()
-    }
+        draw();
+    };
 
     function draw()
     {
         clearCanvas(canvas);
 
         // 随机生成4个点坐标
-        var xs = [Math.random(), Math.random(), Math.random(), Math.random()].map(i => i * canvas.width);
-        var ys = [Math.random(), Math.random(), Math.random(), Math.random()].map(i => (1 - i) * canvas.height);
+        const xs = [Math.random(), Math.random(), Math.random(), Math.random()].map((i) => i * canvas.width);
+        const ys = [Math.random(), Math.random(), Math.random(), Math.random()].map((i) => (1 - i) * canvas.height);
 
         // 使用 canvas提供的 bezierCurveTo,CanvasRenderingContext2D.bezierCurveTo,CanvasPathMethods.bezierCurveTo 进行绘制曲线
-        drawBezierCurve(canvas, xs, ys, "red", 15);
+        drawBezierCurve(canvas, xs, ys, 'red', 15);
 
         // 使用 bezierCurve 进行采样曲线点
-        var xSamples = bezier.getSamples(xs);
-        var ySamples = bezier.getSamples(ys);
-        drawPointsCurve(canvas, xSamples, ySamples, "green", 5);
+        const xSamples = bezier.bezier.getSamples(xs);
+        const ySamples = bezier.bezier.getSamples(ys);
+        drawPointsCurve(canvas, xSamples, ySamples, 'green', 5);
     }
-
 })();

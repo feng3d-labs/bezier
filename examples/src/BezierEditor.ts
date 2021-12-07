@@ -1,44 +1,44 @@
 (() =>
 {
     // 创建画布
-    var canvas = createCanvas(0, 60, window.innerWidth, window.innerHeight - 60);
+    const canvas = createCanvas(0, 60, window.innerWidth, window.innerHeight - 60);
 
     // window.addEventListener("click", onMouseClick)
-    window.addEventListener("mousedown", onMouseDown);
+    window.addEventListener('mousedown', onMouseDown);
 
-    var xs: number[] = [Math.random() * canvas.width, Math.random() * canvas.width, Math.random() * canvas.width];
-    var ys: number[] = [Math.random() * canvas.height, Math.random() * canvas.height, Math.random() * canvas.height];
-    var editIndex = -1;
-    var editing = false;
-    var mousedownxy = { x: -1, y: -1 }
+    const xs: number[] = [Math.random() * canvas.width, Math.random() * canvas.width, Math.random() * canvas.width];
+    const ys: number[] = [Math.random() * canvas.height, Math.random() * canvas.height, Math.random() * canvas.height];
+    let editIndex = -1;
+    let editing = false;
+    const mousedownxy = { x: -1, y: -1 };
 
     function onMouseDown(ev: MouseEvent)
     {
-        var rect = canvas.getBoundingClientRect();
+        const rect = canvas.getBoundingClientRect();
         if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom))
-            return;
-        var x = ev.clientX - rect.left;
-        var y = ev.clientY - rect.top;
+        { return; }
+        const x = ev.clientX - rect.left;
+        const y = ev.clientY - rect.top;
 
         mousedownxy.x = x;
         mousedownxy.y = y;
 
         editIndex = findPoint(x, y);
-        window.addEventListener("mousemove", onMouseMove);
-        window.addEventListener("mouseup", onMouseUp);
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
     }
 
     function onMouseMove(ev: MouseEvent)
     {
-        if (editIndex == -1)
-            return;
+        if (editIndex === -1)
+        { return; }
         editing = true;
 
-        var rect = canvas.getBoundingClientRect();
+        const rect = canvas.getBoundingClientRect();
         if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom))
-            return;
-        var x = ev.clientX - rect.left;
-        var y = ev.clientY - rect.top;
+        { return; }
+        const x = ev.clientX - rect.left;
+        const y = ev.clientY - rect.top;
 
         xs[editIndex] = x;
         ys[editIndex] = y;
@@ -50,13 +50,14 @@
         {
             editing = false;
             editIndex = -1;
+
             return;
         }
-        var rect = canvas.getBoundingClientRect();
+        const rect = canvas.getBoundingClientRect();
         if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom))
-            return;
-        var x = ev.clientX - rect.left;
-        var y = ev.clientY - rect.top;
+        { return; }
+        const x = ev.clientX - rect.left;
+        const y = ev.clientY - rect.top;
 
         if (Math.abs(mousedownxy.x - x) > 5 || Math.abs(mousedownxy.y - y) > 5)
         {
@@ -64,17 +65,18 @@
             return;
         }
 
-        var index = findPoint(x, y);
-        if (index != -1)
+        const index = findPoint(x, y);
+        if (index !== -1)
         {
             deletePoint(index);
-        } else
+        }
+        else
         {
             addPoint(x, y);
         }
 
-        window.removeEventListener("mousemove", onMouseMove);
-        window.removeEventListener("mouseup", onMouseUp);
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
     }
 
     function findPoint(x: number, y: number)
@@ -86,6 +88,7 @@
                 return i;
             }
         }
+
         return -1;
     }
 
@@ -110,28 +113,27 @@
         if (xs.length > 0)
         {
             // 使用 bezierCurve 进行采样曲线点
-            var xSamples = bezier.getSamples(xs);
-            var ySamples = bezier.getSamples(ys);
+            const xSamples = bezier.bezier.getSamples(xs);
+            const ySamples = bezier.bezier.getSamples(ys);
             // 绘制曲线
             drawPointsCurve(canvas, xSamples, ySamples, 'white', 3);
 
             // 绘制起点
-            drawPoints(canvas, xs.slice(0, 1), ys.slice(0, 1), "red", 16)
+            drawPoints(canvas, xs.slice(0, 1), ys.slice(0, 1), 'red', 16);
 
             // 绘制控制点
             if (xs.length > 2)
-                drawPoints(canvas, xs.slice(1, xs.length - 1), ys.slice(1, ys.length - 1), "blue", 16)
+            { drawPoints(canvas, xs.slice(1, xs.length - 1), ys.slice(1, ys.length - 1), 'blue', 16); }
 
             // 绘制终点
             if (xs.length > 1)
-                drawPoints(canvas, xs.slice(xs.length - 1, xs.length), ys.slice(ys.length - 1, ys.length), "green", 16)
+            { drawPoints(canvas, xs.slice(xs.length - 1, xs.length), ys.slice(ys.length - 1, ys.length), 'green', 16); }
 
             // 绘制控制点之间的连线
             if (xs.length > 2)
-                drawPointsCurve(canvas, xs, ys, "yellow", 1);
+            { drawPointsCurve(canvas, xs, ys, 'yellow', 1); }
         }
         //
         requestAnimationFrame(draw);
     }
-
 })();

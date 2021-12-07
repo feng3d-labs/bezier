@@ -1,7 +1,7 @@
 (function () {
-    var input = document.getElementById("input");
-    var button = document.getElementById("button");
-    var stopBtn = document.getElementById("stopBtn");
+    var input = document.getElementById('input');
+    var button = document.getElementById('button');
+    var stopBtn = document.getElementById('stopBtn');
     // 创建画布
     var canvas = createCanvas(0, 60, window.innerWidth, window.innerHeight - 60);
     input.value = "" + 64;
@@ -9,23 +9,25 @@
     var isStop = false;
     draw();
     button.onclick = function () {
-        if (requestid)
+        if (requestid) {
             cancelAnimationFrame(requestid);
+        }
         draw();
     };
     stopBtn.onclick = function () {
         isStop = !isStop;
         if (isStop) {
-            stopBtn.value = "播放";
+            stopBtn.value = '播放';
         }
         else {
-            stopBtn.value = "停止";
+            stopBtn.value = '停止';
         }
     };
     function draw() {
         var numPoints = Number(input.value) + 1;
-        if (isNaN(numPoints))
+        if (isNaN(numPoints)) {
             numPoints = 2;
+        }
         numPoints = Math.max(1, Math.min(500, numPoints));
         var xs = [];
         var ys = [];
@@ -42,8 +44,8 @@
         for (var i = 0; i <= num; i++) {
             var processsx = [];
             var processsy = [];
-            var x = bezier.bn(i / num, xs, processsx);
-            var y = bezier.bn(i / num, ys, processsy);
+            var x = bezier.bezier.bn(i / num, xs, processsx);
+            var y = bezier.bezier.bn(i / num, ys, processsy);
             animations[i] = { x: x, y: y, processsx: processsx, processsy: processsy };
         }
         var t = 0;
@@ -53,8 +55,9 @@
         var usecolors = getColors(xs.length);
         function animation() {
             //
-            if (!isStop)
+            if (!isStop) {
                 t += dir;
+            }
             if (t > 100) {
                 t = 100;
                 dir = -1;
@@ -74,11 +77,11 @@
             // 绘制整条曲线
             var xSamples = animations.map(function (i) { return i.x; });
             var ySamples = animations.map(function (i) { return i.y; });
-            drawPointsCurve(canvas, xSamples, ySamples, "green", 5);
+            drawPointsCurve(canvas, xSamples, ySamples, 'green', 5);
             // 绘制曲线动画
             var txs = animations.map(function (i) { return i.x; }).splice(0, t);
             var tys = animations.map(function (i) { return i.y; }).splice(0, t);
-            drawPointsCurve(canvas, txs, tys, "red", 3);
+            drawPointsCurve(canvas, txs, tys, 'red', 3);
         }
     }
 })();

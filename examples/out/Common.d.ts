@@ -12,7 +12,7 @@ declare function clearCanvas(canvas: HTMLCanvasElement, fillStyle?: string): voi
  */
 declare function drawPointsCurve(canvas: HTMLCanvasElement, xpoints: number[], ypoints: number[], strokeStyle?: string, lineWidth?: number): void;
 declare function drawBezierCurve(canvas: HTMLCanvasElement, xpoints: number[], ypoints: number[], strokeStyle?: string, lineWidth?: number): void;
-declare var ColorKeywords: {
+declare const ColorKeywords: {
     aliceblue: number;
     antiquewhite: number;
     aqua: number;

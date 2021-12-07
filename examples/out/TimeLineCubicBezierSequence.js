@@ -46,8 +46,9 @@ var TimeLineCubicBezierSequence = /** @class */ (function () {
      */
     TimeLineCubicBezierSequence.prototype.deleteKey = function (key) {
         var index = this.keys.indexOf(key);
-        if (index != -1)
+        if (index !== -1) {
             this.keys.splice(index, 1);
+        }
     };
     /**
      * 获取关键点
@@ -84,17 +85,15 @@ var TimeLineCubicBezierSequence = /** @class */ (function () {
                 if (maxtan > Math.abs(tanstart) && maxtan > Math.abs(tanend)) {
                     var ct = (t - prekey.t) / (key.t - prekey.t);
                     var sys = [ystart, ystart + tanstart * (xend - xstart) / 3, yend - tanend * (xend - xstart) / 3, yend];
-                    var fy = bezier.getValue(ct, sys);
-                    return { t: t, y: fy, tan: bezier.getDerivative(ct, sys) / (xend - xstart) };
+                    var fy = bezier.bezier.getValue(ct, sys);
+                    return { t: t, y: fy, tan: bezier.bezier.getDerivative(ct, sys) / (xend - xstart) };
                 }
-                else {
-                    return { t: t, y: prekey.y, tan: 0 };
-                }
+                return { t: t, y: prekey.y, tan: 0 };
             }
-            if (i == 0 && t <= key.t) {
+            if (i === 0 && t <= key.t) {
                 return { t: t, y: key.y, tan: 0 };
             }
-            if (i == n - 1 && t >= key.t) {
+            if (i === n - 1 && t >= key.t) {
                 return { t: t, y: key.y, tan: 0 };
             }
         }

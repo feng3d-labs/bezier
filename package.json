@@ -16,7 +16,7 @@
     "build:w": "tsc -b -w",
     "bundle": "rollup -c",
     "bundle:w": "rollup -c -w ",
-    "lint": "eslint --ext .js --ext .ts src test rollup.config.js --ignore-path .gitignore --max-warnings 0",
+    "lint": "eslint --ext .js --ext .ts src test examples rollup.config.js --ignore-path .gitignore --max-warnings 0",
     "lintfix": "npm run lint -- --fix",
     "test": "mocha",
     "docs": "rimraf public && typedoc",
