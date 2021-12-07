@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var bezier = require("../../dist");
-var Common_1 = require("./Common");
+var Common_1 = require("./common/Common");
 (function () {
     // 创建画布
     var canvas = (0, Common_1.createCanvas)(0, 60, window.innerWidth, window.innerHeight - 60);

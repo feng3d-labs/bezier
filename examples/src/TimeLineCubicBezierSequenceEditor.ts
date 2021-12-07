@@ -1,5 +1,5 @@
-import { createCanvas, clearCanvas, drawPointsCurve, drawPoints } from './Common';
-import { TimeLineCubicBezierKey, TimeLineCubicBezierSequence } from './TimeLineCubicBezierSequence';
+import { createCanvas, clearCanvas, drawPointsCurve, drawPoints } from './common/Common';
+import { TimeLineCubicBezierKey, TimeLineCubicBezierSequence } from './common/TimeLineCubicBezierSequence';
 
 (() =>
 {

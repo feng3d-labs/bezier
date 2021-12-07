@@ -1,4 +1,4 @@
-import { bezier } from '../..';
+import { bezier } from '../../..';
 
 export interface TimeLineCubicBezierKey
 {

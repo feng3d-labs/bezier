@@ -1,4 +1,4 @@
-import { createCanvas, clearCanvas, drawPointsCurve, drawPoints } from './Common';
+import { createCanvas, clearCanvas, drawPointsCurve, drawPoints } from './common/Common';
 import { bezier } from '../..';
 
 (() =>

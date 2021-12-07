@@ -1,5 +1,5 @@
 import bezier = require('../../dist');
-import { clearCanvas, createCanvas, drawPoints, drawPointsCurve } from './Common';
+import { clearCanvas, createCanvas, drawPoints, drawPointsCurve } from './common/Common';
 
 (() =>
 {

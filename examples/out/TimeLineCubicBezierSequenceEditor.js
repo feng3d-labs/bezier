@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Common_1 = require("./Common");
-var TimeLineCubicBezierSequence_1 = require("./TimeLineCubicBezierSequence");
+var Common_1 = require("./common/Common");
+var TimeLineCubicBezierSequence_1 = require("./common/TimeLineCubicBezierSequence");
 (function () {
     // 基于时间的连续三阶Bézier曲线编辑，意味着一个x对应唯一的y
     // 创建画布

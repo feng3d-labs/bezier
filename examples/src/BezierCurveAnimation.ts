@@ -1,5 +1,5 @@
 import { bezier } from '../..';
-import { createCanvas, getColors, clearCanvas, drawPointsCurve } from './Common';
+import { createCanvas, getColors, clearCanvas, drawPointsCurve } from './common/Common';
 
 (() =>
 {

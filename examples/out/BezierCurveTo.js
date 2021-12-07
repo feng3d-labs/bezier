@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Common_1 = require("./Common");
+var Common_1 = require("./common/Common");
 var __1 = require("../..");
 (function () {
     // 创建画布

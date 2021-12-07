@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var __1 = require("../..");
-var Common_1 = require("./Common");
+var Common_1 = require("./common/Common");
 (function () {
     var input = document.getElementById('input');
     var button = document.getElementById('button');
