@@ -1,3 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TimeLineCubicBezierSequence = void 0;
+var __1 = require("../..");
 /**
  * 基于时间轴的连续三阶Bézier曲线
  *
@@ -85,8 +89,8 @@ var TimeLineCubicBezierSequence = /** @class */ (function () {
                 if (maxtan > Math.abs(tanstart) && maxtan > Math.abs(tanend)) {
                     var ct = (t - prekey.t) / (key.t - prekey.t);
                     var sys = [ystart, ystart + tanstart * (xend - xstart) / 3, yend - tanend * (xend - xstart) / 3, yend];
-                    var fy = bezier.bezier.getValue(ct, sys);
-                    return { t: t, y: fy, tan: bezier.bezier.getDerivative(ct, sys) / (xend - xstart) };
+                    var fy = __1.bezier.getValue(ct, sys);
+                    return { t: t, y: fy, tan: __1.bezier.getDerivative(ct, sys) / (xend - xstart) };
                 }
                 return { t: t, y: prekey.y, tan: 0 };
             }
@@ -157,4 +161,5 @@ var TimeLineCubicBezierSequence = /** @class */ (function () {
     };
     return TimeLineCubicBezierSequence;
 }());
+exports.TimeLineCubicBezierSequence = TimeLineCubicBezierSequence;
 //# sourceMappingURL=TimeLineCubicBezierSequence.js.map

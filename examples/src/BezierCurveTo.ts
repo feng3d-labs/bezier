@@ -1,3 +1,6 @@
+import { createCanvas, clearCanvas, drawBezierCurve, drawPointsCurve } from './Common';
+import { bezier } from '../..';
+
 (() =>
 {
     // 创建画布
@@ -22,8 +25,8 @@
         drawBezierCurve(canvas, xs, ys, 'red', 15);
 
         // 使用 bezierCurve 进行采样曲线点
-        const xSamples = bezier.bezier.getSamples(xs);
-        const ySamples = bezier.bezier.getSamples(ys);
+        const xSamples = bezier.getSamples(xs);
+        const ySamples = bezier.getSamples(ys);
         drawPointsCurve(canvas, xSamples, ySamples, 'green', 5);
     }
 })();

@@ -1,6 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Common_1 = require("./Common");
+var __1 = require("../..");
 (function () {
     // 创建画布
-    var canvas = createCanvas(0, 60, window.innerWidth, window.innerHeight - 60);
+    var canvas = (0, Common_1.createCanvas)(0, 60, window.innerWidth, window.innerHeight - 60);
     // window.addEventListener("click", onMouseClick)
     window.addEventListener('mousedown', onMouseDown);
     var xs = [Math.random() * canvas.width, Math.random() * canvas.width, Math.random() * canvas.width];
@@ -79,26 +83,26 @@
     }
     requestAnimationFrame(draw);
     function draw() {
-        clearCanvas(canvas);
+        (0, Common_1.clearCanvas)(canvas);
         if (xs.length > 0) {
             // 使用 bezierCurve 进行采样曲线点
-            var xSamples = bezier.bezier.getSamples(xs);
-            var ySamples = bezier.bezier.getSamples(ys);
+            var xSamples = __1.bezier.getSamples(xs);
+            var ySamples = __1.bezier.getSamples(ys);
             // 绘制曲线
-            drawPointsCurve(canvas, xSamples, ySamples, 'white', 3);
+            (0, Common_1.drawPointsCurve)(canvas, xSamples, ySamples, 'white', 3);
             // 绘制起点
-            drawPoints(canvas, xs.slice(0, 1), ys.slice(0, 1), 'red', 16);
+            (0, Common_1.drawPoints)(canvas, xs.slice(0, 1), ys.slice(0, 1), 'red', 16);
             // 绘制控制点
             if (xs.length > 2) {
-                drawPoints(canvas, xs.slice(1, xs.length - 1), ys.slice(1, ys.length - 1), 'blue', 16);
+                (0, Common_1.drawPoints)(canvas, xs.slice(1, xs.length - 1), ys.slice(1, ys.length - 1), 'blue', 16);
             }
             // 绘制终点
             if (xs.length > 1) {
-                drawPoints(canvas, xs.slice(xs.length - 1, xs.length), ys.slice(ys.length - 1, ys.length), 'green', 16);
+                (0, Common_1.drawPoints)(canvas, xs.slice(xs.length - 1, xs.length), ys.slice(ys.length - 1, ys.length), 'green', 16);
             }
             // 绘制控制点之间的连线
             if (xs.length > 2) {
-                drawPointsCurve(canvas, xs, ys, 'yellow', 1);
+                (0, Common_1.drawPointsCurve)(canvas, xs, ys, 'yellow', 1);
             }
         }
         //

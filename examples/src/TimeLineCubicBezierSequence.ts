@@ -1,4 +1,6 @@
-interface TimeLineCubicBezierKey
+import { bezier } from '../..';
+
+export interface TimeLineCubicBezierKey
 {
     /**
      * 时间轴的位置 [0,1]
@@ -19,7 +21,7 @@ interface TimeLineCubicBezierKey
  *
  * @author feng / http://feng3d.com 10/06/2018
  */
-class TimeLineCubicBezierSequence
+export class TimeLineCubicBezierSequence
 {
     /**
      * 最大tan值，超出该值后将会变成分段
@@ -113,9 +115,9 @@ class TimeLineCubicBezierSequence
                 {
                     const ct = (t - prekey.t) / (key.t - prekey.t);
                     const sys = [ystart, ystart + tanstart * (xend - xstart) / 3, yend - tanend * (xend - xstart) / 3, yend];
-                    const fy = bezier.bezier.getValue(ct, sys);
+                    const fy = bezier.getValue(ct, sys);
 
-                    return { t, y: fy, tan: bezier.bezier.getDerivative(ct, sys) / (xend - xstart) };
+                    return { t, y: fy, tan: bezier.getDerivative(ct, sys) / (xend - xstart) };
                 }
 
                 return { t, y: prekey.y, tan: 0 };

@@ -1,4 +1,4 @@
-interface TimeLineCubicBezierKey {
+export interface TimeLineCubicBezierKey {
     /**
      * 时间轴的位置 [0,1]
      */
@@ -17,7 +17,7 @@ interface TimeLineCubicBezierKey {
  *
  * @author feng / http://feng3d.com 10/06/2018
  */
-declare class TimeLineCubicBezierSequence {
+export declare class TimeLineCubicBezierSequence {
     /**
      * 最大tan值，超出该值后将会变成分段
      */

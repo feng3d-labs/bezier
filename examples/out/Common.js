@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.drawPoints = exports.getColors = exports.ColorKeywords = exports.drawBezierCurve = exports.drawPointsCurve = exports.clearCanvas = exports.createCanvas = void 0;
 function createCanvas(x, y, width, height) {
     if (x === void 0) { x = 0; }
     if (y === void 0) { y = 0; }
@@ -14,6 +17,7 @@ function createCanvas(x, y, width, height) {
     document.body.appendChild(canvas);
     return canvas;
 }
+exports.createCanvas = createCanvas;
 /**
  * 清理画布
  * @param canvas 画布
@@ -26,6 +30,7 @@ function clearCanvas(canvas, fillStyle) {
     ctx.fillStyle = fillStyle;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
+exports.clearCanvas = clearCanvas;
 /**
  * 绘制曲线
  * @param canvas 画布
@@ -45,6 +50,7 @@ function drawPointsCurve(canvas, xpoints, ypoints, strokeStyle, lineWidth) {
     }
     ctx.stroke();
 }
+exports.drawPointsCurve = drawPointsCurve;
 function drawBezierCurve(canvas, xpoints, ypoints, strokeStyle, lineWidth) {
     if (strokeStyle === void 0) { strokeStyle = 'white'; }
     if (lineWidth === void 0) { lineWidth = 3; }
@@ -56,7 +62,8 @@ function drawBezierCurve(canvas, xpoints, ypoints, strokeStyle, lineWidth) {
     ctx.bezierCurveTo(xpoints[1], ypoints[1], xpoints[2], ypoints[2], xpoints[3], ypoints[3]);
     ctx.stroke();
 }
-var ColorKeywords = {
+exports.drawBezierCurve = drawBezierCurve;
+exports.ColorKeywords = {
     aliceblue: 0xF0F8FF, antiquewhite: 0xFAEBD7, aqua: 0x00FFFF, aquamarine: 0x7FFFD4, azure: 0xF0FFFF,
     beige: 0xF5F5DC, bisque: 0xFFE4C4, black: 0x000000, blanchedalmond: 0xFFEBCD, blue: 0x0000FF, blueviolet: 0x8A2BE2,
     brown: 0xA52A2A, burlywood: 0xDEB887, cadetblue: 0x5F9EA0, chartreuse: 0x7FFF00, chocolate: 0xD2691E, coral: 0xFF7F50,
@@ -84,7 +91,7 @@ var ColorKeywords = {
 };
 function getColors(num) {
     // 获取插值过程想掩饰
-    var colors = Object.keys(ColorKeywords);
+    var colors = Object.keys(exports.ColorKeywords);
     var usecolors = [];
     for (var i = 0; i < num; i++) {
         var color = colors[Math.floor(colors.length * Math.random())];
@@ -92,6 +99,7 @@ function getColors(num) {
     }
     return usecolors;
 }
+exports.getColors = getColors;
 /**
  * 绘制点
  * @param canvas 画布
@@ -109,4 +117,5 @@ function drawPoints(canvas, xpoints, ypoints, fillStyle, lineWidth) {
         // ctx.fillRect(10, 10, 100, 100);
     }
 }
+exports.drawPoints = drawPoints;
 //# sourceMappingURL=Common.js.map

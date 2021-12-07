@@ -10,8 +10,6 @@
     // "outFile": "out/bezier.js"
   },
   "include": [
-    //
-    "../dist/index.d.ts",
     "src/**/*.ts"
   ],
 }

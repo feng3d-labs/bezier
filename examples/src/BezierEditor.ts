@@ -1,3 +1,6 @@
+import { createCanvas, clearCanvas, drawPointsCurve, drawPoints } from './Common';
+import { bezier } from '../..';
+
 (() =>
 {
     // 创建画布
@@ -55,7 +58,9 @@
         }
         const rect = canvas.getBoundingClientRect();
         if (!(rect.left < ev.clientX && ev.clientX < rect.right && rect.top < ev.clientY && ev.clientY < rect.bottom))
-        { return; }
+        {
+            return;
+        }
         const x = ev.clientX - rect.left;
         const y = ev.clientY - rect.top;
 
@@ -113,8 +118,8 @@
         if (xs.length > 0)
         {
             // 使用 bezierCurve 进行采样曲线点
-            const xSamples = bezier.bezier.getSamples(xs);
-            const ySamples = bezier.bezier.getSamples(ys);
+            const xSamples = bezier.getSamples(xs);
+            const ySamples = bezier.getSamples(ys);
             // 绘制曲线
             drawPointsCurve(canvas, xSamples, ySamples, 'white', 3);
 
@@ -123,15 +128,21 @@
 
             // 绘制控制点
             if (xs.length > 2)
-            { drawPoints(canvas, xs.slice(1, xs.length - 1), ys.slice(1, ys.length - 1), 'blue', 16); }
+            {
+                drawPoints(canvas, xs.slice(1, xs.length - 1), ys.slice(1, ys.length - 1), 'blue', 16);
+            }
 
             // 绘制终点
             if (xs.length > 1)
-            { drawPoints(canvas, xs.slice(xs.length - 1, xs.length), ys.slice(ys.length - 1, ys.length), 'green', 16); }
+            {
+                drawPoints(canvas, xs.slice(xs.length - 1, xs.length), ys.slice(ys.length - 1, ys.length), 'green', 16);
+            }
 
             // 绘制控制点之间的连线
             if (xs.length > 2)
-            { drawPointsCurve(canvas, xs, ys, 'yellow', 1); }
+            {
+                drawPointsCurve(canvas, xs, ys, 'yellow', 1);
+            }
         }
         //
         requestAnimationFrame(draw);

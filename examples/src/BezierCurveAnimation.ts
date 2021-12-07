@@ -1,3 +1,6 @@
+import { bezier } from '../..';
+import { createCanvas, getColors, clearCanvas, drawPointsCurve } from './Common';
+
 (() =>
 {
     const input = <HTMLInputElement>document.getElementById('input');
@@ -75,8 +78,8 @@
         {
             const processsx: number[][] = [];
             const processsy: number[][] = [];
-            const x = bezier.bezier.bn(i / num, xs, processsx);
-            const y = bezier.bezier.bn(i / num, ys, processsy);
+            const x = bezier.bn(i / num, xs, processsx);
+            const y = bezier.bn(i / num, ys, processsy);
 
             animations[i] = { x, y, processsx, processsy };
         }

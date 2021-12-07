@@ -1,4 +1,4 @@
-function createCanvas(x = 0, y = 0, width = 100, height = 100)
+export function createCanvas(x = 0, y = 0, width = 100, height = 100)
 {
     const canvas = document.createElement('canvas');
     canvas.style.position = 'fixed';
@@ -17,7 +17,7 @@ function createCanvas(x = 0, y = 0, width = 100, height = 100)
  * 清理画布
  * @param canvas 画布
  */
-function clearCanvas(canvas: HTMLCanvasElement, fillStyle = 'black')
+export function clearCanvas(canvas: HTMLCanvasElement, fillStyle = 'black')
 {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -32,7 +32,7 @@ function clearCanvas(canvas: HTMLCanvasElement, fillStyle = 'black')
  * @param points 曲线上的点
  * @param strokeStyle 曲线颜色
  */
-function drawPointsCurve(canvas: HTMLCanvasElement, xpoints: number[], ypoints: number[], strokeStyle = 'white', lineWidth = 3)
+export function drawPointsCurve(canvas: HTMLCanvasElement, xpoints: number[], ypoints: number[], strokeStyle = 'white', lineWidth = 3)
 {
     const ctx = canvas.getContext('2d');
     ctx.beginPath();
@@ -46,7 +46,7 @@ function drawPointsCurve(canvas: HTMLCanvasElement, xpoints: number[], ypoints: 
     ctx.stroke();
 }
 
-function drawBezierCurve(canvas: HTMLCanvasElement, xpoints: number[], ypoints: number[], strokeStyle = 'white', lineWidth = 3)
+export function drawBezierCurve(canvas: HTMLCanvasElement, xpoints: number[], ypoints: number[], strokeStyle = 'white', lineWidth = 3)
 {
     const ctx = canvas.getContext('2d');
     ctx.beginPath();
@@ -57,7 +57,7 @@ function drawBezierCurve(canvas: HTMLCanvasElement, xpoints: number[], ypoints: 
     ctx.stroke();
 }
 
-const ColorKeywords = {
+export const ColorKeywords = {
     aliceblue: 0xF0F8FF, antiquewhite: 0xFAEBD7, aqua: 0x00FFFF, aquamarine: 0x7FFFD4, azure: 0xF0FFFF,
     beige: 0xF5F5DC, bisque: 0xFFE4C4, black: 0x000000, blanchedalmond: 0xFFEBCD, blue: 0x0000FF, blueviolet: 0x8A2BE2,
     brown: 0xA52A2A, burlywood: 0xDEB887, cadetblue: 0x5F9EA0, chartreuse: 0x7FFF00, chocolate: 0xD2691E, coral: 0xFF7F50,
@@ -84,7 +84,7 @@ const ColorKeywords = {
     violet: 0xEE82EE, wheat: 0xF5DEB3, white: 0xFFFFFF, whitesmoke: 0xF5F5F5, yellow: 0xFFFF00, yellowgreen: 0x9ACD32
 };
 
-function getColors(num: number)
+export function getColors(num: number)
 {
     // 获取插值过程想掩饰
     const colors = Object.keys(ColorKeywords);
@@ -105,7 +105,7 @@ function getColors(num: number)
  * @param ypoints 曲线上的点y坐标
  * @param fillStyle 曲线颜色
  */
-function drawPoints(canvas: HTMLCanvasElement, xpoints: number[], ypoints: number[], fillStyle = 'white', lineWidth = 3)
+export function drawPoints(canvas: HTMLCanvasElement, xpoints: number[], ypoints: number[], fillStyle = 'white', lineWidth = 3)
 {
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = fillStyle;

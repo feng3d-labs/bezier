@@ -1,3 +1,6 @@
+import { createCanvas, clearCanvas, drawPointsCurve, drawPoints } from './Common';
+import { TimeLineCubicBezierKey, TimeLineCubicBezierSequence } from './TimeLineCubicBezierSequence';
+
 (() =>
 {
     // 基于时间的连续三阶Bézier曲线编辑，意味着一个x对应唯一的y

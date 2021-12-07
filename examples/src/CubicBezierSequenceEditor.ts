@@ -1,3 +1,6 @@
+import { createCanvas, clearCanvas, drawPointsCurve, drawPoints } from './Common';
+import { bezier } from '../..';
+
 (() =>
 {
     // 创建画布
@@ -203,20 +206,20 @@
                 const sxs = xs.slice(i * 3 - 3, i * 3 + 1);
                 const sys = ys.slice(i * 3 - 3, i * 3 + 1);
                 // 先在曲线上找到y再比较x
-                const yTs = bezier.bezier.getTFromValue(y, sys);
+                const yTs = bezier.getTFromValue(y, sys);
                 for (let j = 0; j < yTs.length; j++)
                 {
-                    const xv = bezier.bezier.getValue(yTs[j], sxs);
+                    const xv = bezier.getValue(yTs[j], sxs);
                     if (Math.abs(xv - x) < pointSize / 2)
                     {
                         return { index: i, t: yTs[j] };
                     }
                 }
                 // 先在曲线上找到x再比较y
-                const xTs = bezier.bezier.getTFromValue(x, sxs);
+                const xTs = bezier.getTFromValue(x, sxs);
                 for (let j = 0; j < xTs.length; j++)
                 {
-                    const yv = bezier.bezier.getValue(xTs[j], sys);
+                    const yv = bezier.getValue(xTs[j], sys);
                     if (Math.abs(yv - y) < pointSize / 2)
                     {
                         return { index: i, t: xTs[j] };
@@ -266,15 +269,15 @@
             const lastx = xs[xs.length - 1];
             const lasty = ys[ys.length - 1];
             // 自动新增两个控制点
-            let cx0 = bezier.bezier.linear(1 / 3, lastx, x);
-            let cy0 = bezier.bezier.linear(1 / 3, lasty, y);
+            let cx0 = bezier.linear(1 / 3, lastx, x);
+            let cy0 = bezier.linear(1 / 3, lasty, y);
             if (xs.length - 2 > -1)
             {
                 cx0 = lastx * 2 - xs[xs.length - 2];
                 cy0 = lasty * 2 - ys[ys.length - 2];
             }
-            const cx1 = bezier.bezier.linear(2 / 3, cx0, x);
-            const cy1 = bezier.bezier.linear(2 / 3, cy0, y);
+            const cx1 = bezier.linear(2 / 3, cx0, x);
+            const cy1 = bezier.linear(2 / 3, cy0, y);
             //
             xs.push(cx0, cx1, x);
             ys.push(cy0, cy1, y);
@@ -297,9 +300,9 @@
         const sxs = xs.slice(curveIndex * 3 - 3, curveIndex * 3 + 1);
         const sys = ys.slice(curveIndex * 3 - 3, curveIndex * 3 + 1);
         const processsx: number[][] = [];
-        bezier.bezier.bn(t, sxs, processsx);
+        bezier.bn(t, sxs, processsx);
         const processsy: number[][] = [];
-        bezier.bezier.bn(t, sys, processsy);
+        bezier.bn(t, sys, processsy);
 
         const nxs: number[] = [];
         const nys: number[] = [];
@@ -341,8 +344,8 @@
                 const sxs = xs.slice(i * 3 - 3, i * 3 + 1);
                 const sys = ys.slice(i * 3 - 3, i * 3 + 1);
 
-                const xSamples = bezier.bezier.getSamples(sxs);
-                const ySamples = bezier.bezier.getSamples(sys);
+                const xSamples = bezier.getSamples(sxs);
+                const ySamples = bezier.getSamples(sys);
                 // 绘制曲线
                 drawPointsCurve(canvas, xSamples, ySamples, 'white', 3);
             }
@@ -352,15 +355,23 @@
 
             // 绘制控制点
             if (i > 0)
-            { drawPoints(canvas, xs.slice(i * 3 - 1, i * 3 + 0), ys.slice(i * 3 - 1, i * 3 + 0), 'blue', pointSize); }
+            {
+                drawPoints(canvas, xs.slice(i * 3 - 1, i * 3 + 0), ys.slice(i * 3 - 1, i * 3 + 0), 'blue', pointSize);
+            }
             if (i < n - 1)
-            { drawPoints(canvas, xs.slice(i * 3 + 1, i * 3 + 2), ys.slice(i * 3 + 1, i * 3 + 2), 'blue', pointSize); }
+            {
+                drawPoints(canvas, xs.slice(i * 3 + 1, i * 3 + 2), ys.slice(i * 3 + 1, i * 3 + 2), 'blue', pointSize);
+            }
 
             // 绘制控制点之间的连线
             if (i > 0)
-            { drawPointsCurve(canvas, xs.slice(i * 3 - 1, i * 3 + 1), ys.slice(i * 3 - 1, i * 3 + 1), 'yellow', 1); }
+            {
+                drawPointsCurve(canvas, xs.slice(i * 3 - 1, i * 3 + 1), ys.slice(i * 3 - 1, i * 3 + 1), 'yellow', 1);
+            }
             if (i < n - 1)
-            { drawPointsCurve(canvas, xs.slice(i * 3 + 0, i * 3 + 2), ys.slice(i * 3 + 0, i * 3 + 2), 'yellow', 1); }
+            {
+                drawPointsCurve(canvas, xs.slice(i * 3 + 0, i * 3 + 2), ys.slice(i * 3 + 0, i * 3 + 2), 'yellow', 1);
+            }
         }
         //
         requestAnimationFrame(draw);

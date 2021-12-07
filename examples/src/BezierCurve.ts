@@ -1,3 +1,6 @@
+import bezier = require('../../dist');
+import { clearCanvas, createCanvas, drawPoints, drawPointsCurve } from './Common';
+
 (() =>
 {
     // 创建画布

@@ -1,6 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Common_1 = require("./Common");
+var __1 = require("../..");
 (function () {
     // 创建画布
-    var canvas = createCanvas(0, 60, window.innerWidth, window.innerHeight - 60);
+    var canvas = (0, Common_1.createCanvas)(0, 60, window.innerWidth, window.innerHeight - 60);
     // window.addEventListener("click", onMouseClick)
     window.addEventListener('mousedown', onMouseDown);
     /**
@@ -159,17 +163,17 @@
                 var sxs = xs.slice(i * 3 - 3, i * 3 + 1);
                 var sys = ys.slice(i * 3 - 3, i * 3 + 1);
                 // 先在曲线上找到y再比较x
-                var yTs = bezier.bezier.getTFromValue(y, sys);
+                var yTs = __1.bezier.getTFromValue(y, sys);
                 for (var j = 0; j < yTs.length; j++) {
-                    var xv = bezier.bezier.getValue(yTs[j], sxs);
+                    var xv = __1.bezier.getValue(yTs[j], sxs);
                     if (Math.abs(xv - x) < pointSize / 2) {
                         return { index: i, t: yTs[j] };
                     }
                 }
                 // 先在曲线上找到x再比较y
-                var xTs = bezier.bezier.getTFromValue(x, sxs);
+                var xTs = __1.bezier.getTFromValue(x, sxs);
                 for (var j = 0; j < xTs.length; j++) {
-                    var yv = bezier.bezier.getValue(xTs[j], sys);
+                    var yv = __1.bezier.getValue(xTs[j], sys);
                     if (Math.abs(yv - y) < pointSize / 2) {
                         return { index: i, t: xTs[j] };
                     }
@@ -208,14 +212,14 @@
             var lastx = xs[xs.length - 1];
             var lasty = ys[ys.length - 1];
             // 自动新增两个控制点
-            var cx0 = bezier.bezier.linear(1 / 3, lastx, x);
-            var cy0 = bezier.bezier.linear(1 / 3, lasty, y);
+            var cx0 = __1.bezier.linear(1 / 3, lastx, x);
+            var cy0 = __1.bezier.linear(1 / 3, lasty, y);
             if (xs.length - 2 > -1) {
                 cx0 = lastx * 2 - xs[xs.length - 2];
                 cy0 = lasty * 2 - ys[ys.length - 2];
             }
-            var cx1 = bezier.bezier.linear(2 / 3, cx0, x);
-            var cy1 = bezier.bezier.linear(2 / 3, cy0, y);
+            var cx1 = __1.bezier.linear(2 / 3, cx0, x);
+            var cy1 = __1.bezier.linear(2 / 3, cy0, y);
             //
             xs.push(cx0, cx1, x);
             ys.push(cy0, cy1, y);
@@ -235,9 +239,9 @@
         var sxs = xs.slice(curveIndex * 3 - 3, curveIndex * 3 + 1);
         var sys = ys.slice(curveIndex * 3 - 3, curveIndex * 3 + 1);
         var processsx = [];
-        bezier.bezier.bn(t, sxs, processsx);
+        __1.bezier.bn(t, sxs, processsx);
         var processsy = [];
-        bezier.bezier.bn(t, sys, processsy);
+        __1.bezier.bn(t, sys, processsy);
         var nxs = [];
         var nys = [];
         processsx;
@@ -262,32 +266,32 @@
     }
     requestAnimationFrame(draw);
     function draw() {
-        clearCanvas(canvas);
+        (0, Common_1.clearCanvas)(canvas);
         for (var i = 0, n = xs.length / 3; i < n; i++) {
             // 使用 bezierCurve 进行采样曲线点
             if (i > 0) {
                 var sxs = xs.slice(i * 3 - 3, i * 3 + 1);
                 var sys = ys.slice(i * 3 - 3, i * 3 + 1);
-                var xSamples = bezier.bezier.getSamples(sxs);
-                var ySamples = bezier.bezier.getSamples(sys);
+                var xSamples = __1.bezier.getSamples(sxs);
+                var ySamples = __1.bezier.getSamples(sys);
                 // 绘制曲线
-                drawPointsCurve(canvas, xSamples, ySamples, 'white', 3);
+                (0, Common_1.drawPointsCurve)(canvas, xSamples, ySamples, 'white', 3);
             }
             // 绘制曲线端点
-            drawPoints(canvas, xs.slice(i * 3, i * 3 + 1), ys.slice(i * 3, i * 3 + 1), 'red', pointSize);
+            (0, Common_1.drawPoints)(canvas, xs.slice(i * 3, i * 3 + 1), ys.slice(i * 3, i * 3 + 1), 'red', pointSize);
             // 绘制控制点
             if (i > 0) {
-                drawPoints(canvas, xs.slice(i * 3 - 1, i * 3 + 0), ys.slice(i * 3 - 1, i * 3 + 0), 'blue', pointSize);
+                (0, Common_1.drawPoints)(canvas, xs.slice(i * 3 - 1, i * 3 + 0), ys.slice(i * 3 - 1, i * 3 + 0), 'blue', pointSize);
             }
             if (i < n - 1) {
-                drawPoints(canvas, xs.slice(i * 3 + 1, i * 3 + 2), ys.slice(i * 3 + 1, i * 3 + 2), 'blue', pointSize);
+                (0, Common_1.drawPoints)(canvas, xs.slice(i * 3 + 1, i * 3 + 2), ys.slice(i * 3 + 1, i * 3 + 2), 'blue', pointSize);
             }
             // 绘制控制点之间的连线
             if (i > 0) {
-                drawPointsCurve(canvas, xs.slice(i * 3 - 1, i * 3 + 1), ys.slice(i * 3 - 1, i * 3 + 1), 'yellow', 1);
+                (0, Common_1.drawPointsCurve)(canvas, xs.slice(i * 3 - 1, i * 3 + 1), ys.slice(i * 3 - 1, i * 3 + 1), 'yellow', 1);
             }
             if (i < n - 1) {
-                drawPointsCurve(canvas, xs.slice(i * 3 + 0, i * 3 + 2), ys.slice(i * 3 + 0, i * 3 + 2), 'yellow', 1);
+                (0, Common_1.drawPointsCurve)(canvas, xs.slice(i * 3 + 0, i * 3 + 2), ys.slice(i * 3 + 0, i * 3 + 2), 'yellow', 1);
             }
         }
         //
