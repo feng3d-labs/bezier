@@ -1,5 +1,5 @@
 ### Bézier曲线
-https://wardenfeng.github.io/bezier
+https://feng3d-labs.github.io/bezier
 
 创建该库的原始目的是为了解决feng3d引擎粒子中时间与常量的变化曲线问题。
 
