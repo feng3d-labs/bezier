@@ -4,6 +4,7 @@
 
 > 解决n次Bézier曲线拟合与求解问题
 
-[github](https://github.com/wardenfeng/bezier)
-[issues](https://github.com/wardenfeng/bezier/issues)
+[Github](https://github.com/feng3d-labs/bezier)
+[Issues](https://github.com/feng3d-labs/bezier/issues)
+[API Docs](https://feng3d-labs.github.io/bezier/public)
 [Get Started](#Bézier曲线)
