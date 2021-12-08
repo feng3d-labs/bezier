@@ -44,7 +44,7 @@ https://feng3d-labs.github.io/bezier
 1. 切线法 求解 f(x) == 0 ``` equationSolving.tangent ```
 1. 割线法（弦截法） 求解 f(x) == 0 ``` equationSolving.secant ```
 
-#### 示例
+<!-- #### 示例
 ##### 使用BezierCurve进行模拟canvas提供的 bezierCurveTo方法
 
 [quickstart website](examples/BezierCurveTo.html ':include :type=iframe width=100% height=400px')
@@ -65,11 +65,7 @@ https://feng3d-labs.github.io/bezier
 
 该示例已经满足feng3d中曲线编辑器的需求。
 
-[quickstart website](examples/TimeLineCubicBezierSequenceEditor.html ':include :type=iframe width=100% height=400px')
-
-#### 单元测试
-
-[quickstart website](tests/index.html ':include :type=iframe width=100% height=400px')
+[quickstart website](examples/TimeLineCubicBezierSequenceEditor.html ':include :type=iframe width=100% height=400px') -->
 
 #### 参考资料
 1. https://en.wikipedia.org/wiki/B%C3%A9zier_curve
