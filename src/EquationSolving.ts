@@ -109,7 +109,7 @@ export class EquationSolving
      *
      * @returns 不存在解时返回 undefined ，存在时返回 解
      */
-    binary(f: (x) => number, a: number, b: number, precision = 0.0000001, errorcallback?: (err: Error) => void)
+    binary(f: (x: number) => number, a: number, b: number, precision = 0.0000001, errorcallback?: (err: Error) => void)
     {
         if (!this.hasSolution(f, a, b, errorcallback)) return undefined;
 
@@ -128,8 +128,8 @@ export class EquationSolving
         let fr: number;
         do
         {
-            fr = f(x);
             x = (a + b) / 2;
+            fr = f(x);
             if (fa * fr < 0)
             {
                 b = x;
