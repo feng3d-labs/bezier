@@ -3,6 +3,6 @@
     "entryPoints": [
         "src/index.ts"
     ],
-    "sourcefile-url-prefix": "https://gitlab.com/feng3d/bezier/tree/master/src/",
+    "sourcefile-url-prefix":"https://gitlab.com/feng3d/bezier/tree/master/src/",
     "out": "public"
 }
