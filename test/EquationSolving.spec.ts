@@ -1,5 +1,5 @@
 import { ok } from 'assert';
-import { equationSolving, HighFunction } from '..';
+import { equationSolving, HighFunction } from '../src';
 
 describe('EquationSolving', () =>
 {

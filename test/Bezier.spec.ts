@@ -1,5 +1,5 @@
 import { ok } from 'assert';
-import { bezier, equationSolving } from '..';
+import { bezier, equationSolving } from '../src';
 
 describe('Bezier', () =>
 {
