@@ -1,44 +1,47 @@
-/**
- * 高次函数
- *
- * 处理N次函数定义，求值，方程求解问题
- *
- * n次函数定义
- * f(x) = a0 * pow(x, n) + a1 * pow(x, n - 1) +.....+ an_1 * pow(x, 1) + an
- *
- * 0次 f(x) = a0;
- * 1次 f(x) = a0 * x + a1;
- * 2次 f(x) = a0 * x * x + a1 * x + a2;
- * ......
- *
- * @author feng / http://feng3d.com 05/06/2018
- */
-export class HighFunction
+namespace feng3d
 {
-    private as: number[];
-
     /**
-     * 构建函数
-     * @param as 函数系数 a0-an 数组
+     * 高次函数
+     *
+     * 处理N次函数定义，求值，方程求解问题
+     *
+     * n次函数定义
+     * f(x) = a0 * pow(x, n) + a1 * pow(x, n - 1) +.....+ an_1 * pow(x, 1) + an
+     *
+     * 0次 f(x) = a0;
+     * 1次 f(x) = a0 * x + a1;
+     * 2次 f(x) = a0 * x * x + a1 * x + a2;
+     * ......
+     *
+     * @author feng / http://feng3d.com 05/06/2018
      */
-    constructor(as: number[])
+    export class HighFunction
     {
-        this.as = as;
-    }
+        private as: number[];
 
-    /**
-     * 获取函数 f(x) 的值
-     * @param x x坐标
-     */
-    getValue(x: number)
-    {
-        let v = 0;
-        const as = this.as;
-        for (let i = 0, n = as.length; i < n; i++)
+        /**
+         * 构建函数
+         * @param as 函数系数 a0-an 数组
+         */
+        constructor(as: number[])
         {
-            v = v * x + as[i];
+            this.as = as;
         }
 
-        return v;
+        /**
+         * 获取函数 f(x) 的值
+         * @param x x坐标
+         */
+        getValue(x: number)
+        {
+            let v = 0;
+            const as = this.as;
+            for (let i = 0, n = as.length; i < n; i++)
+            {
+                v = v * x + as[i];
+            }
+
+            return v;
+        }
     }
 }
