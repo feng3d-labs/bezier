@@ -462,3 +462,4 @@ export class EquationSolving
  * 方程求解
  */
 export const equationSolving = new EquationSolving();
+
